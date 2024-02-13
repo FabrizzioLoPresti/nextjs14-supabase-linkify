@@ -10,19 +10,27 @@ export default async function ProfilePage({}: Props) {
 
   const {
     data: { user },
-    error,
+    error: userError,
   } = await supabase.auth.getUser();
 
-  if (error) {
-    redirect('/login');
+  if (userError) {
+    redirect('/access');
   }
 
-  console.log(user);
+  const { data, error } = await supabase
+    .from('links')
+    .select('*, user:users(name, email, user_name, avatar_url)')
+    .eq('user_id', user?.id);
+
+  if (error) {
+    redirect('/access');
+  }
+
+  console.log(data);
 
   return (
     <section className="grid place-content-center min-h-[100dvh] bg-darkprimary">
       <h1>Profile</h1>
-      <p>{user?.email}</p>
     </section>
   );
 }

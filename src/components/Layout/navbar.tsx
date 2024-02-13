@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { IconClick, IconMenuDeep, IconX } from '@tabler/icons-react';
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
@@ -35,6 +36,7 @@ const Navbar = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [session, setSession] = useState<User | null>(null);
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
@@ -50,6 +52,14 @@ const Navbar = (props: Props) => {
 
     getUser();
   }, [supabase.auth]);
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error(error);
+    }
+    router.refresh();
+  };
 
   return (
     <header>
@@ -67,7 +77,12 @@ const Navbar = (props: Props) => {
           {!session ? (
             <Link href="/access">Access</Link>
           ) : (
-            <Link href="/profile">Profile</Link>
+            <>
+              <Link href="/profile">Profile</Link>
+              <button type="button" onClick={handleSignOut}>
+                Log Out
+              </button>
+            </>
           )}
           {isMenuOpen ? (
             <IconX

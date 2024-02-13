@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase:login": "npx supabase login",
+    "supabase:generate-types": "npx supabase gen types typescript --project-id nmyfhghsxmfitpkzwjsz > ./src/app/types/database.d.ts"
   },
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.7",
