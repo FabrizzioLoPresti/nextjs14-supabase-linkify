@@ -12,22 +12,25 @@ export type Database = {
       links: {
         Row: {
           created_at: string
-          description: string
-          id: number
+          id: string
+          logo: string | null
+          name: string
           url: string
           user_id: string
         }
         Insert: {
           created_at?: string
-          description: string
-          id?: number
+          id?: string
+          logo?: string | null
+          name: string
           url: string
           user_id?: string
         }
         Update: {
           created_at?: string
-          description?: string
-          id?: number
+          id?: string
+          logo?: string | null
+          name?: string
           url?: string
           user_id?: string
         }
