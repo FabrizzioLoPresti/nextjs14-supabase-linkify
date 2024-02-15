@@ -18,6 +18,7 @@ const AuthForm = (props: Props) => {
         theme="dark"
         appearance={{ theme: ThemeSupa }}
         providers={['google']}
+        redirectTo="http://localhost:3000/auth/callback"
       />
     </div>
   );

@@ -6,6 +6,15 @@ import { useRouter } from 'next/navigation';
 import { IconClick, IconMenuDeep, IconX } from '@tabler/icons-react';
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 type Props = {};
 
@@ -58,6 +67,7 @@ const Navbar = (props: Props) => {
     if (error) {
       console.error(error);
     }
+    setSession(null);
     router.refresh();
   };
 
@@ -73,15 +83,33 @@ const Navbar = (props: Props) => {
           <NavLinks />
         </nav>
 
-        <div className="flex flex-row gap-x-4">
+        <div className="flex flex-row gap-x-4 items-center">
           {!session ? (
             <Link href="/access">Access</Link>
           ) : (
             <>
-              <Link href="/profile">Profile</Link>
-              <button type="button" onClick={handleSignOut}>
-                Log Out
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Billing</DropdownMenuItem>
+                  <DropdownMenuItem>Subscription</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <button type="button" onClick={handleSignOut}>
+                      Log Out
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
           )}
           {isMenuOpen ? (

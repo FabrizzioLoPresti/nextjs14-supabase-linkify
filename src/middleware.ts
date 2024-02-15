@@ -7,6 +7,7 @@ export async function middleware(request: NextRequest) {
       headers: request.headers,
     },
   })
+  const { pathname } = request.nextUrl
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -54,8 +55,15 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  await supabase.auth.getUser()
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser()
 
+  // if (!user && pathname.startsWith('/profile')) {
+  //   return NextResponse.redirect(`${request.nextUrl.origin}/access`)
+  // }
+
+  await supabase.auth.getUser()
   return response
 }
 

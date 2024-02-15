@@ -5,9 +5,9 @@ type Props = {};
 
 const HeroSection = (props: Props) => {
   return (
-    <main className="bg-[#610C9F]">
+    <main className="bg-violet">
       <div className="max-w-7xl mx-auto min-h-[100dvh] flex lg:flex-row items-center lg:justify-between px-8 xl:px-0">
-        <div className="lg:w-1/2 text-[#dba9be] flex flex-col gap-y-6">
+        <div className="lg:w-1/2 text-lightViolet flex flex-col gap-y-6">
           <h1 className="text-5xl lg:text-7xl font-bold">
             Your online essence, captured in one link.
           </h1>

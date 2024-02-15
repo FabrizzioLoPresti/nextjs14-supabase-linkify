@@ -11,17 +11,12 @@ export default async function AccessPage({}: Props) {
 
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
 
-  // if (error) {
-  //   redirect('/error');
-  // }
-
-  console.log(user);
+  if (user) redirect('/profile');
 
   return (
-    <section className="grid place-content-center min-h-[100dvh] bg-darkprimary">
+    <section className="grid place-content-center min-h-[100dvh] bg-darkViolet">
       <AuthForm />
     </section>
   );

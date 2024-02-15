@@ -11,14 +11,21 @@
     "supabase:generate-types": "npx supabase gen types typescript --project-id nmyfhghsxmfitpkzwjsz > ./src/app/types/database.d.ts"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.1.0",
-    "@supabase/supabase-js": "^2.39.3",
+    "@supabase/supabase-js": "^2.39.6",
     "@tabler/icons-react": "^2.47.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.330.0",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",

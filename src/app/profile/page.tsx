@@ -13,7 +13,7 @@ export default async function ProfilePage({}: Props) {
     error: userError,
   } = await supabase.auth.getUser();
 
-  if (userError) {
+  if (userError || !user) {
     redirect('/access');
   }
 
@@ -29,7 +29,7 @@ export default async function ProfilePage({}: Props) {
   console.log(data);
 
   return (
-    <section className="grid place-content-center min-h-[100dvh] bg-darkprimary">
+    <section className="grid place-content-center min-h-[100dvh] bg-darkViolet">
       <h1>Profile</h1>
     </section>
   );
