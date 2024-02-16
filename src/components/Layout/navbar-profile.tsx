@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { IconClick, IconMenuDeep, IconX } from '@tabler/icons-react';
 import { createClient } from '@/utils/supabase/client';
 import { type User } from '@supabase/supabase-js';
@@ -18,34 +18,47 @@ import {
 
 type Props = {};
 
-const NavLinks = () => (
-  <>
-    <Link
-      href="/profile"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
-    >
-      Links
-    </Link>
-    <Link
-      href="/profile/appearance"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
-    >
-      Appearance
-    </Link>
-    <Link
-      href="/profile/analytics"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
-    >
-      Analytics
-    </Link>
-    <Link
-      href="/profile/settings"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
-    >
-      Settings
-    </Link>
-  </>
-);
+const NavLinks = () => {
+  const pathname = usePathname();
+  console.log(pathname);
+
+  return (
+    <>
+      <Link
+        href="/profile"
+        className={`hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0 ${
+          pathname === '/profile' && 'font-bold'
+        }`}
+      >
+        Links
+      </Link>
+      <Link
+        href="/profile/appearance"
+        className={`hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0 ${
+          pathname === '/profile/appearance' && 'font-bold'
+        }`}
+      >
+        Appearance
+      </Link>
+      <Link
+        href="/profile/analytics"
+        className={`hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0 ${
+          pathname === '/profile/analytics' && 'font-bold'
+        }`}
+      >
+        Analytics
+      </Link>
+      <Link
+        href="/profile/settings"
+        className={`hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0 ${
+          pathname === '/profile/settings' && 'font-bold'
+        }`}
+      >
+        Settings
+      </Link>
+    </>
+  );
+};
 
 const NavbarProfile = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -79,7 +92,7 @@ const NavbarProfile = (props: Props) => {
 
   return (
     <header>
-      <div className="max-w-7xl mx-auto fixed top-6 left-0 right-0 z-50 bg-zinc-300 rounded-full flex flex-row items-center justify-between py-4 px-8">
+      <div className="max-w-7xl mx-auto fixed top-6 left-0 right-0 z-50 bg-claro text-oscuro rounded-full flex flex-row items-center justify-between py-4 px-8">
         <div className="flex flex-row gap-x-4 items-center">
           <Link
             href="/"
@@ -96,14 +109,14 @@ const NavbarProfile = (props: Props) => {
         <div className="flex flex-row gap-x-4 items-center">
           <Link
             href="/upgrade"
-            className="border-2 border-zinc-800 px-4 py-2 rounded-full hover:font-bold transition-all ease-in-out duration-300"
+            className="border-2 border-oscuro px-4 py-2 rounded-full hover:font-bold transition-all ease-in-out duration-300"
           >
             Upgrade
           </Link>
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <div className="border border-zinc-800 px-4 py-2 rounded-full hover:font-bold transition-all ease-in-out duration-300">
+              <div className="border border-oscuro px-4 py-2 rounded-full hover:font-bold transition-all ease-in-out duration-300">
                 Share
               </div>
             </DropdownMenuTrigger>

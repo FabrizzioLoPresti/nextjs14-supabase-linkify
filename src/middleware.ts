@@ -55,13 +55,13 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  // if (!user && pathname.startsWith('/profile')) {
-  //   return NextResponse.redirect(`${request.nextUrl.origin}/access`)
-  // }
+  if (!user && pathname.startsWith('/profile')) {
+    return NextResponse.redirect(`${request.nextUrl.origin}/access`)
+  }
 
   await supabase.auth.getUser()
   return response
@@ -76,6 +76,7 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
+    '/profile/:path*',
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

@@ -22,19 +22,19 @@ const NavLinks = () => (
   <>
     <Link
       href="/about"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
+      className="font-medium hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
     >
       About
     </Link>
     <Link
       href="/pricing"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
+      className="font-medium hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
     >
       Pricing
     </Link>
     <Link
       href="/contact"
-      className="hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
+      className="font-medium hover:font-bold transition-all ease-in-out duration-300 pl-8 md:pl-0"
     >
       Contact
     </Link>
@@ -73,7 +73,7 @@ const Navbar = (props: Props) => {
 
   return (
     <header>
-      <div className="max-w-7xl mx-auto fixed top-6 left-0 right-0 z-50 bg-zinc-300 rounded-full flex flex-row items-center justify-between py-4 px-8">
+      <div className="max-w-7xl mx-auto fixed top-6 left-0 right-0 z-50 bg-claro text-oscuro rounded-full flex flex-row items-center justify-between py-4 px-8">
         <Link href="/" className="font-bold flex flex-row gap-x-1 items-center">
           Linkify
           <IconClick size={24} />

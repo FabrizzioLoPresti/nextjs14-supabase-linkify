@@ -8,11 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "supabase:login": "npx supabase login",
-    "supabase:generate-types": "npx supabase gen types typescript --project-id nmyfhghsxmfitpkzwjsz > ./src/app/types/database.d.ts"
+    "supabase:generate-types": "npx supabase gen types typescript --project-id nmyfhghsxmfitpkzwjsz > ./src/types/database.d.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-switch": "^1.0.3",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.1.0",
