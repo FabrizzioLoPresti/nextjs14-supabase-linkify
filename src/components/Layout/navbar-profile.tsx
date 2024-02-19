@@ -20,7 +20,6 @@ type Props = {};
 
 const NavLinks = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <>

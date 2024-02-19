@@ -10,11 +10,11 @@ const LinksList = async ({ id }: Props) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  // TODO!: Refactor this adding tags from Next.js 14 Fetch to RevalidateTag in Actions
   const { data, error } = await supabase
     .from('links')
     .select('*')
     .eq('user_id', id as string);
-  console.log(data);
 
   return (
     <div className="mt-8">

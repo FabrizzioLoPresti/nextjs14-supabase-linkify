@@ -17,14 +17,14 @@ export default async function ProfilePage({}: Props) {
     error: sessionError,
   } = await supabase.auth.getUser();
 
+  // TODO!: Refactor DataBase Functions for change Username in Register
   const { data: user, error: userError } = await supabase
     .from('users')
     .select('id, name, user_name, avatar_url')
     .eq('id', session?.id as string)
     .single();
-  console.log(user, userError);
 
-  // Clavar un Skeleton Loader
+  // TODO!: Clavar un Skeleton Loader
   return (
     <section className="grid grid-cols-3 min-h-[100dvh] h-full pt-40 bg-oscuro">
       <div className="col-span-2 h-full flex flex-col items-center px-4">
