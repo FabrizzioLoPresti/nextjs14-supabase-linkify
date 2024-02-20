@@ -77,3 +77,57 @@ export const addLink = async (link: LinkEntity) => {
     revalidatePath('/profile', 'layout')
   }
 }
+
+export const updateState = async (link: Partial<LinkEntity>) => {
+  try {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+
+    // TODO!: Verify if use authtenticated policy "user_id = auth.uid()" from Supabase
+    const { error } = await supabase.from('links').update({
+      active: link.active,
+    }).eq('id', link.id as string).eq('user_id', user?.id as string)
+
+    if (error) {
+      return {
+        error: 'There was an error updating the link',
+      }
+    }
+
+    // TODO!: Use Realtime Sockets Functions from Supabase if not work revalidateTags()
+    revalidatePath('/profile', 'layout')
+  } catch (error) {
+    console.error(error)
+    redirect('/error')
+  } finally {
+    revalidatePath('/profile', 'layout')
+  }
+}
+
+export const deleteLink = async (id: string) => {
+  try {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+
+    // TODO!: Verify if use authtenticated policy "user_id = auth.uid()" from Supabase
+    const { error } = await supabase.from('links').delete().eq('id', id).eq('user_id', user?.id as string)
+
+    if (error) {
+      return {
+        error: 'There was an error deleting the link',
+      }
+    }
+
+    // TODO!: Use Realtime Sockets Functions from Supabase if not work revalidateTags()
+    revalidatePath('/profile', 'layout')
+  } catch (error) {
+    console.error(error)
+    redirect('/error')
+  } finally {
+    revalidatePath('/profile', 'layout')
+  }
+}

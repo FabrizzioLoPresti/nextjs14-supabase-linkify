@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 import { IconTrash, IconPencil } from '@tabler/icons-react';
 import { LinkEntity } from '@/types/types';
 import SwitchState from './switch-state';
+import { deleteLink } from '@/actions/actions';
 
 type Props = {
   link: LinkEntity;
 };
 
 const LinkCard = ({ link }: Props) => {
+  const handleDelete = async () => {
+    await deleteLink(link.id);
+  };
+
   return (
     <div key={link.id} className="flex flex-col bg-claro rounded-md p-4 mb-4">
       <div className="flex flex-row items-center justify-between">
@@ -29,7 +36,7 @@ const LinkCard = ({ link }: Props) => {
 
       <div className="flex flex-row items-center justify-between">
         <div>Otros</div>
-        <IconTrash className="w-6 h-6" />
+        <IconTrash className="w-6 h-6 cursor-pointer" onClick={handleDelete} />
       </div>
     </div>
   );

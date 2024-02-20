@@ -14,7 +14,8 @@ const LinksList = async ({ id }: Props) => {
   const { data, error } = await supabase
     .from('links')
     .select('*')
-    .eq('user_id', id as string);
+    .eq('user_id', id as string)
+    .order('created_at', { ascending: true });
 
   return (
     <div className="mt-8">
