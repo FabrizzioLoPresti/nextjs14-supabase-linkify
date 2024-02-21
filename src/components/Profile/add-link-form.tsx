@@ -1,37 +1,49 @@
-import { useTransition, useState } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
-import { LinkEntity } from '@/types/types';
-import { addLink } from '@/actions/actions';
-import { toast } from 'sonner';
 import { Button } from '../ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '../ui/label';
 import { SheetFooter } from '@/components/ui/sheet';
 import { Toaster } from '../ui/sonner';
+import { toast } from 'sonner';
+import { addLink, updateLink } from '@/actions/actions';
+import { useLinksStore } from '@/store/linksStore';
+import { LinkEntity } from '@/types/types';
 
 type Props = {
   setOpen: (open: boolean) => void;
+  linkEdit?: LinkEntity | null;
 };
 
-const AddLinkForm = ({ setOpen }: Props) => {
+const AddLinkForm = ({ setOpen, linkEdit }: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<LinkEntity>();
   const [isPending, startTransition] = useTransition();
+  const clearLinkEdit = useLinksStore((state) => state.clearLinkEdit);
 
   const onSubmit = handleSubmit(async (data) => {
     startTransition(async () => {
-      const response = await addLink(data);
+      if (linkEdit) {
+        const response = await updateLink({ ...data, id: linkEdit.id });
 
-      if (response?.error) {
-        toast.error(response.error);
-        return;
+        if (response?.error) {
+          toast.error(response.error);
+          return;
+        }
+      } else {
+        const response = await addLink(data);
+
+        if (response?.error) {
+          toast.error(response.error);
+          return;
+        }
       }
 
       setOpen(false);
+      clearLinkEdit();
     });
   });
 
@@ -44,6 +56,7 @@ const AddLinkForm = ({ setOpen }: Props) => {
           id="name"
           placeholder="My LinkedIn Profile"
           className="col-span-3 text-claro placeholder:text-claro"
+          defaultValue={linkEdit?.name || ''}
           {...register('name', {
             required: {
               value: true,
@@ -63,6 +76,7 @@ const AddLinkForm = ({ setOpen }: Props) => {
           id="url"
           placeholder="https://..."
           className="col-span-3 text-claro placeholder:text-claro"
+          defaultValue={linkEdit?.url || ''}
           {...register('url', {
             required: {
               value: true,
@@ -86,6 +100,7 @@ const AddLinkForm = ({ setOpen }: Props) => {
           id="logo"
           placeholder="logo"
           className="col-span-3 text-claro placeholder:text-claro"
+          defaultValue={linkEdit?.logo || ''}
         />
       </div>
       <SheetFooter>

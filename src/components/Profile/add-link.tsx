@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Sheet,
   SheetContent,
@@ -9,17 +9,29 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import AddLinkForm from './add-link-form';
 import { IconPencilPlus } from '@tabler/icons-react';
+import { useLinksStore } from '@/store/linksStore';
+import AddLinkForm from './add-link-form';
 
 type Props = {};
 
 const AddLink = (props: Props) => {
   const [open, setOpen] = useState<boolean>(false);
+  const linkEdit = useLinksStore((state) => state.linkEdit);
+  const clearLinkEdit = useLinksStore((state) => state.clearLinkEdit);
+
+  useEffect(() => {
+    if (linkEdit) {
+      setOpen(true);
+    }
+  }, [linkEdit]);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className="w-full text-center bg-violet text-white p-6 rounded-full flex flex-row items-center gap-x-2">
+      <SheetTrigger
+        className="w-full text-center bg-violet text-white p-6 rounded-full flex flex-row items-center gap-x-2"
+        onClick={() => clearLinkEdit()}
+      >
         <IconPencilPlus className="w-6 h-6" />
         Add your Link
       </SheetTrigger>
@@ -33,7 +45,7 @@ const AddLink = (props: Props) => {
             You can add a new link to your profile and order them as you like.
           </SheetDescription>
         </SheetHeader>
-        <AddLinkForm setOpen={setOpen} />
+        <AddLinkForm setOpen={setOpen} linkEdit={linkEdit} />
       </SheetContent>
     </Sheet>
   );
