@@ -26,9 +26,9 @@ export default async function ProfilePage({}: Props) {
 
   // TODO!: Clavar un Skeleton Loader
   return (
-    <section className="grid grid-cols-3 min-h-[100dvh] h-full pt-40 bg-oscuro">
-      <div className="col-span-2 h-full flex flex-col items-center px-4">
-        <div className="bg-claro rounded-md w-full p-4 flex flex-row items-center justify-between">
+    <section className="min-h-[100dvh] h-full pt-40 bg-oscuro">
+      <div className="h-full flex flex-col items-center px-4">
+        <div className="bg-claro rounded-md p-4 flex flex-row items-center justify-between w-1/2 mx-auto">
           <p>
             Your Linkify is live now:{' '}
             <Link
@@ -51,8 +51,6 @@ export default async function ProfilePage({}: Props) {
           <LinksList id={session?.id} />
         </div>
       </div>
-
-      <div className="col-span-1 border-l border-zinc-500">Preview</div>
     </section>
   );
 }

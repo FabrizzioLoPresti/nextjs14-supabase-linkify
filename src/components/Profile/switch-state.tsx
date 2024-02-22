@@ -7,6 +7,7 @@ type Props = {
 };
 
 const SwitchState = ({ link }: Props) => {
+  // TODO!: utilizar Hook useOptimistic
   const handleChange = async () => {
     await updateState({
       id: link.id,

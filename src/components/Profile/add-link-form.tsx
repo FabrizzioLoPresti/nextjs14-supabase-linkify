@@ -101,6 +101,7 @@ const AddLinkForm = ({ setOpen, linkEdit }: Props) => {
           placeholder="logo"
           className="col-span-3 text-claro placeholder:text-claro"
           defaultValue={linkEdit?.logo || ''}
+          disabled
         />
       </div>
       <SheetFooter>
